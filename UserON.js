@@ -3,7 +3,7 @@
 import { load_simple_user_page } from "./user_roles/load_simple_user_page.js";
 import { load_admin_page } from "./user_roles/load_admin_page.js";
 import { getuserrole } from "./user_managment.js";
-import { signout } from "./SignOut_button.js";
+import { signout } from "./sign_out_button.js";
 
 const simple_user_SignOutButtonPlace = document.getElementById('contentSignOutButton')
 const admin_user_SignOutButtonPlace = document.getElementById('signoutButton')
