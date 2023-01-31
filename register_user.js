@@ -29,6 +29,7 @@ function registeruser() {
             })
     
             console.log('New User Created')
+            
         })
     
         .catch((error) => {
