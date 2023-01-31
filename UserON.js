@@ -2,22 +2,24 @@
 
 import { load_simple_user_page } from "./user_roles/load_simple_user_page.js";
 import { load_admin_page } from "./user_roles/load_admin_page.js";
-import { tabai } from "./tabs.js";
 import { getuserrole } from "./user_managment.js";
 import { signout } from "./SignOut_button.js";
 
-const SignOutButtonPlace = document.getElementById('contentSignOutButton')
+const simple_user_SignOutButtonPlace = document.getElementById('contentSignOutButton')
+const admin_user_SignOutButtonPlace = document.getElementById('signoutButton')
 
 function useron() {
     getuserrole().then(data => {
-        if (data == 'simple_user') {
-            signout(SignOutButtonPlace)
+        if (data == 'admin') {
+            signout(admin_user_SignOutButtonPlace)
+            load_admin_page()
+        }
+        else if (data == 'simple_user') {
+            signout(simple_user_SignOutButtonPlace)
             load_simple_user_page()
-            tabai()
         }
         else {
-            load_admin_page()
-            console.log('Neveikia')
+            location.reload();
         }
     })
 }

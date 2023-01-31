@@ -5,6 +5,6 @@ const firebaseConfig = {
     storageBucket: "skelbimas-618fe.appspot.com",
     messagingSenderId: "556028213770",
     appId: "1:556028213770:web:3273868ef03a82eaecfdf3"
-  };
+};
 
-  export {firebaseConfig}
+export {firebaseConfig}

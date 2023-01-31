@@ -1,7 +1,5 @@
 
 
-
-
 function useroff() {
     document.getElementById('admin_content').style.display = 'none'
 
@@ -13,7 +11,7 @@ function useroff() {
 
 
     document.getElementById('adverts_content').style.display = 'none'
-    document.getElementById('nav-tab').style.display = 'none'
+    document.getElementById('simple_user_tabs').style.display = 'none'
 
 
     document.getElementById('register').addEventListener('click', ()=> {
@@ -25,6 +23,7 @@ function useroff() {
         document.getElementById('loginForm').style.display = 'block'
         document.getElementById('registerForm').style.display = 'none'
     })
+
 }
 
 export { useroff }

@@ -1,32 +1,14 @@
-//To Do:
-//sutvarkyti update, kad updatintu tik to userio skelbimus kuris yra prisijunges, ir ivedus kitoki produkto koda nesukurtu naujo skelbimo
-//sutvarkyti update mygtuka, kad jei iveda neteisinga koda mestu alert()
-//suzinoti ar remove mygtuko reikia ar ne arba remove gali buti kad removina tik viena skelbima
 
 
-
-
-
-
- // Import the functions you need from the SDKs you need
- import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
- import { firebaseConfig } from "./firebase.js";
-
- // TODO: Add SDKs for Firebase products that you want to use
- // https://firebase.google.com/docs/web/setup#available-libraries
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { firebaseConfig } from "./firebase.js";
 
 
 import { getuseruid } from "./user_managment.js";
-
- // Your web app's Firebase configuration
-
-
- // Initialize Firebase
- const app = initializeApp(firebaseConfig);
-
-import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 import { fill_admin_product } from "./user_roles/load_admin_page.js";
- 
+
+const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
 
@@ -45,7 +27,11 @@ let updateBtn = document.getElementById("update")
 let removeBtn = document.getElementById("remove")
 let findBtn = document.getElementById("find")
 
-function get_product_categories() {
+ 
+let selected_category = 'No Category'
+
+function display_product_categories() {
+
     const dbref = ref(db)
 
     get(child(dbref, "Categories/"))
@@ -62,22 +48,20 @@ function get_product_categories() {
                 
                 categoryaction.addEventListener('click', ()=> {
                     console.log(value.CategoryName)
-                    return value.CategoryName
+                    selected_category = value.CategoryName
                 })
             }
         })
-        
 
         .catch((error) => {
-            alert(error)
+            console.log('No categories in database')
         })
 }
-get_product_categories()
 
 
 
 function InsertData(evt) {
-    console.log(insine)
+    // console.log(picked_category)
     if (enterID.value == "" || enterName.value == "" || enterQuantity.value == "") {
         alert('neuzpildyti visi laukai')
         return
@@ -94,7 +78,7 @@ function InsertData(evt) {
         Description: enterDescription.value,
         Photo: enterPhoto.value,
         User: getuseruid(),
-        // Category: get_product_categories()
+        Category: selected_category
     })
     .then(() => {
         alert('Data Added!')
@@ -155,7 +139,6 @@ function UpdateData(evt) {
     }
     // console.log(`update function ${enterID.value} ${enterName.value} ${enterQuantity.value}`)
 
-
     const dbref = ref(db)
 
     get(child(dbref, "Products/"))
@@ -167,12 +150,13 @@ function UpdateData(evt) {
                         Quantity: enterQuantity.value,
                         Price: enterPrice.value,
                         Description: enterDescription.value,
-                        Photo: enterPhoto.value
+                        Photo: enterPhoto.value,
+                        Category: selected_category
                     })
                 
                     .then(() => {
                         alert('Data Updated')
-                        fillalldata()
+                        fill_one_user_products()
                         return
                     })
                     .catch((error) => {
@@ -191,7 +175,6 @@ function UpdateData(evt) {
 }
 
 updateBtn.addEventListener('click', UpdateData)
-
 
 function RemoveProduct(productid) {
     remove(ref(db, "Products/" + productid))
@@ -226,6 +209,7 @@ function fill_one_user_products() {
 }
 
 function loadproduct(product, appendproduct, favourite_button = false) {
+
     let listItem = document.createElement('li')
     listItem.classList.add("list=group-item", "list-group-item-secondary")
     listItem.innerHTML = "Product Name: " + product.Name
@@ -260,6 +244,11 @@ function loadproduct(product, appendproduct, favourite_button = false) {
 
     appendproduct.appendChild(listItem)
 
+    let listItemSixed = document.createElement('li')
+    listItemSixed.classList.add("list-group-item", "list-group-item-light")
+    listItemSixed.textContent = "Product Category: " + product.Category
+    appendproduct.appendChild(listItemSixed)
+
     let listItemSecond = document.createElement('li')
     listItemSecond.classList.add("list-group-item", "list-group-item-light")
     listItemSecond.textContent = "Product Quantity: " + product.Quantity
@@ -283,42 +272,7 @@ function loadproduct(product, appendproduct, favourite_button = false) {
     listItemFived.textContent = "Photo: "
     appendproduct.appendChild(listItemFived)
     appendproduct.appendChild(my_img)
-
-
-
-
-    // document.getElementById(commentsId).addEventListener('click', ()=> {
-    //     var myModal = new bootstrap.Modal(document.getElementById('commentsModal'))
-    //     // let commentsContent = document.getElementById('commentsBody')
-    //     //get All comments by product ID
-        
-    //     // commentsContent.textContent = commentsId;
-    //     myModal.show()
-
-    //     document.getElementById('sumbitcomment').addEventListener('click', ()=> {
-    //         let entercomment = document.getElementById('entercomment')
-    //         let commentcontent = document.getElementById('commentcontent')
-        
-    //         let li = document.createElement('li')
-    //         li.classList.add('list-group-item')
-    //         li.textContent = entercomment.value
-    //         commentcontent.appendChild(li)
-
-    //         set(ref(db, "Product_comments/" + product.ID + entercomment.value), {
-    //             Comments: entercomment.value
-                
-    //         })
-    //         .then(() => {
-    //             alert('Data Added!')
-    //         })
-    //         .catch((error) => {
-    //             alert(error)
-    //         })
-            
-    //     })
-
-
-    // })
+    
 }
 
 
@@ -331,11 +285,9 @@ function show_favourite_products() {
     get(child(dbref, "Favourite_products/"))
         .then((snapshot) => {
             for (const [key, value] of Object.entries(snapshot.val())) {
-                // console.log(value.product)
                 get(child(dbref, "Products/" + value.product))
                     .then((snapshot) => {
                         loadproduct(snapshot.val(), append_favourite_ad)
-                        // console.log(snapshot.val())
                     })
 
                     .catch((error) => {
@@ -346,7 +298,8 @@ function show_favourite_products() {
         })
 
         .catch((error) => {
-            alert(error)
+            console.log("No favourite ads")
+
         })
 }
 
@@ -389,21 +342,10 @@ function display_user_product(product, appendproduct) {
     })
 }
 
-
-// function display_comment_button(product, appendproduct) {
-//     const commentButton = document.createElement('button')
-//     commentButton.textContent = 'Comment'
-//     remove_product_button.id = 'comment' + product.ID
-//     remove_product_button.classList.add('btn', 'btn-primary')
-//     appendproduct.appendChild(commentButton)
-
-// }
-
-
 document.getElementById('clear').addEventListener('click', ()=> {
     findData.value = ''
     fillalldata()
 })
 
 
-export { fill_one_user_products, display_admin_product, display_user_product, loadproduct, show_favourite_products }
+export { fill_one_user_products, display_admin_product, display_user_product, loadproduct, show_favourite_products, display_product_categories }

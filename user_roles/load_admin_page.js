@@ -1,29 +1,21 @@
-import { firebaseConfig } from "../firebase.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 import { blockuser } from "../user_managment.js";
 import { display_admin_product } from "../product_managment.js";
-import { signout } from "../signout_button.js";
 
-const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
-const ads = document.getElementById('ads')
 
 function load_admin_page() {
-
     console.log('ADMIN Settings')
 
     document.getElementById('admin_content').style.display = 'block'
     document.getElementById('forms').style.display = 'none';    
     document.getElementById('content').style.display = 'none'
+    document.getElementById('simple_user_tabs').style.display = 'none'
 
-    
-    signout(document.getElementById('signoutButton'))
 
     fillallusers()
     fill_admin_product()
-
 }
 
 
@@ -50,8 +42,8 @@ document.getElementById('insertCategory').addEventListener('click', ()=> {
 function fillallusers() {
     const dbref = ref(db)
 
-    const users = document.getElementById('users')
-    users.textContent = ''
+    const admin_users = document.getElementById('admin_users')
+    admin_users.textContent = ''
 
     get(child(dbref, "users/"))
         .then((snapshot) => {
@@ -64,8 +56,8 @@ function fillallusers() {
                 user_button.textContent = 'BLOCK'
                 user_button.type = 'button'
                 user_button.id = key
-                users.appendChild(h2)
-                users.appendChild(user_button)
+                admin_users.appendChild(h2)
+                admin_users.appendChild(user_button)
                 document.getElementById(key).addEventListener('click', ()=> {
                     blockuser(key)
                 })
@@ -79,23 +71,23 @@ function fillallusers() {
 
 
 function fill_admin_product() {
+    let admin_ads = document.getElementById('admin_ads')
 
     const dbref = ref(db)
 
     get(child(dbref, "Products/"))
         .then((snapshot) => {
-            ads.innerHTML = ""
+            admin_ads.innerHTML = ""
             for (const [key, value] of Object.entries(snapshot.val())) {
-                display_admin_product(value, ads)
+                display_admin_product(value, admin_ads)
             }
 
         })
         
 
         .catch((error) => {
-            alert(error)
+            console.log('No products in admin page')
         })
-        
 }
 
 

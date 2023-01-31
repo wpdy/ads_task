@@ -31,7 +31,7 @@ function showallads() {
         
 
         .catch((error) => {
-            alert(error)
+            console.log('No ads')
         })
         
 }

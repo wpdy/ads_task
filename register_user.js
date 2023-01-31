@@ -5,6 +5,7 @@ import { getAuth, deleteUser, createUserWithEmailAndPassword, signInWithEmailAnd
 import { firebaseConfig } from "./firebase.js";
 
 
+
 const app = initializeApp(firebaseConfig)
 const database = getDatabase(app)
 const auth = getAuth()
@@ -25,7 +26,6 @@ function registeruser() {
                 user_email: email,
                 role: 'simple_user',
                 timestamp: `${timestamp}`,
-                disabled: false
             })
     
             console.log('New User Created')

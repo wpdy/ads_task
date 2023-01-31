@@ -9,7 +9,7 @@ function signout(appendSignOutButton) {
     const SignOutButton = document.createElement('button')
     SignOutButton.textContent = 'Sign Out'
     SignOutButton.id = 'signOut'
-    SignOutButton.className = 'btn btn-secondary'
+    SignOutButton.className = 'btn btn-dark'
     appendSignOutButton.appendChild(SignOutButton)
     
     SignOutButton.addEventListener('click', ()=> {

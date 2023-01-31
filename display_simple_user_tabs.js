@@ -3,7 +3,7 @@ import { showallads } from "./show_all_ads.js"
 
 
 
-function tabai() {
+function display_simple_user_tabs() {
     showadsbutton()
     showcreateadbutton()
     show_favourite_ads()
@@ -37,4 +37,4 @@ function show_favourite_ads() {
     })
 }
 
-export { tabai }
+export { display_simple_user_tabs }

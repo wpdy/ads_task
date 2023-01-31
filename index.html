@@ -14,53 +14,27 @@
 </head>
 <body class="bg-warning">
 
-    <div class="nav nav-tabs container mb-5" id="nav-tab" role="tablist">
-        <button class="nav-link" id="addadvert" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">ADS</button>
-        <button class="nav-link" id="show_favourite_ads" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Favourite ADS</button>
-        <button class="nav-link active" id="createadvert" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Create AD</button>
-    </div>
-      
-    <div class="container" >
-        <ul class="list-group px-3" id="adverts_content"></ul>
-    </div>
-
-    <div class="container" >
-        <ul class="list-group px-3" id="favourite_ads"></ul>
-    </div>
-
-    <!-- <div class="modal fade" id="commentsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Comments</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div id="commentsBody"class="modal-body">
-                    <ul class="list-group" id="commentcontent">
-                        <li class="list-group-item">Test comment</li>
-                        <li class="list-group-item">Test comment</li>
-                        <li class="list-group-item">Test comment</li>
-                        <li class="list-group-item">Test comment</li>
-                        <li class="list-group-item">Test comment</li>
-                        <li class="list-group-item">Test comment</li>
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <div class="form-check form-check-inline"></div>
-                        <input type="text" id="entercomment">
-                        <button type="button" class="btn btn-primary" id="sumbitcomment">Add Comment</button>
-                    </div>
-                </div>
+    <div id="simple_user_tabs" class="container">
+        <div class="row">
+            <div class="nav nav-tabs mb-5" id="nav-tab" role="tablist">
+                <button class="nav-link" id="addadvert" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">ADS</button>
+                <button class="nav-link" id="show_favourite_ads" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Favourite ADS</button>
+                <button class="nav-link active" id="createadvert" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Create AD</button>
+            </div>
+              
+            <div>
+                <ul class="list-group px-3" id="adverts_content"></ul>
+            </div>
+        
+            <div>
+                <ul class="list-group px-3" id="favourite_ads"></ul>
             </div>
         </div>
-    </div> -->
- 
+    </div>
 
     
 
-
-
-    <div id="forms" class="container justify-content-center ms-1">
+    <div id="forms" class="container">
         <div class="registerForm" id="registerForm">
             <div class="mb-3">
                 <label for="email" class="form-label text-dark">Email</label>
@@ -103,13 +77,11 @@
                     <div class="mb-3">
                         <label for="enterCategory" class="form-label text-secondary">Product Category</label>
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                              Dropdown button
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                              Category
                             </button>
                             <ul class="dropdown-menu" id="dropdowncategory" aria-labelledby="dropdownMenuButton1">
-                                <!-- <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+
                             </ul>
                         </div>
                     </div>
@@ -169,18 +141,18 @@
     
 
 
-    <div class="container" id="admin_content">
+    <div id="admin_content" class="container">
         <div class="row my-5" id="signoutButton"></div>
         <div class="row">
             <div class="input-group mb-3">
                 <button type="button" class="btn btn-secondary" id="insertCategory">Sumbit</button>
-                <input type="text" class="form-control" id="categoryName" placeholder="Iveskite nauja kategorija" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                <input type="text" class="form-control" id="categoryName" placeholder="Enter new category name" aria-label="Example text with button addon" aria-describedby="button-addon1">
             </div>
         </div>
         <div class="row">
-            <div class="col-6" id="users"></div>
+            <div class="col-6" id="admin_users"></div>
             <div class="col-6">
-                <ul class="list-group px-3" id="ads"></ul>
+                <ul class="list-group px-3" id="admin_ads"></ul>
             </div>
         </div>
     </div>
