@@ -45,7 +45,6 @@ let updateBtn = document.getElementById("update")
 let removeBtn = document.getElementById("remove")
 let findBtn = document.getElementById("find")
 
-
 function get_product_categories() {
     const dbref = ref(db)
 
@@ -62,7 +61,7 @@ function get_product_categories() {
                 dropdowncategory.appendChild(categoryname)
                 
                 categoryaction.addEventListener('click', ()=> {
-                    // console.log(value.CategoryName)
+                    console.log(value.CategoryName)
                     return value.CategoryName
                 })
             }
@@ -76,36 +75,9 @@ function get_product_categories() {
 get_product_categories()
 
 
-function get_product_category() {
-    const dbref = ref(db)
-
-    get(child(dbref, "Categories/"))
-        .then((snapshot) => {
-            for (const [key, value] of Object.entries(snapshot.val())) {
-                // console.log(value.CategoryName)   
-                let dropdowncategory = document.getElementById('dropdowncategory')
-                let categoryname = document.createElement('li')
-                let categoryaction = document.createElement('a')
-                categoryaction.textContent = value.CategoryName
-                categoryaction.classList.add('dropdown-item')
-                categoryname.appendChild(categoryaction)
-                dropdowncategory.appendChild(categoryname)
-                
-                categoryaction.addEventListener('click', ()=> {
-                    // console.log(value.CategoryName)
-                    return value.CategoryName
-                })
-            }
-        })
-
-        .catch((error) => {
-            alert(error)
-        })
-}
-
-
 
 function InsertData(evt) {
+    console.log(insine)
     if (enterID.value == "" || enterName.value == "" || enterQuantity.value == "") {
         alert('neuzpildyti visi laukai')
         return
@@ -312,15 +284,6 @@ function loadproduct(product, appendproduct, favourite_button = false) {
     appendproduct.appendChild(listItemFived)
     appendproduct.appendChild(my_img)
 
-
-
-
-    
-
-    
-
-
-    
 
 
 
