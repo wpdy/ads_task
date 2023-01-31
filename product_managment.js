@@ -217,8 +217,8 @@ function loadproduct(product, appendproduct, favourite_button = false) {
 
     if (favourite_button) {
         let favourite_product_button = document.createElement('button')
-        favourite_product_button.textContent = 'Favourite'
-        favourite_product_button.classList.add('btn', 'btn-primary')
+        favourite_product_button.textContent = 'Add to Favourite'
+        favourite_product_button.classList.add('btn', 'btn-outline-secondary', 'ms-2')
         favourite_product_button.id = 'favourite_' + product.ID
         listItem.appendChild(favourite_product_button)
 
