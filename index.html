@@ -10,16 +10,18 @@
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"
-        defer></script>
+        defer>
+    </script>
 </head>
-<body class="bg-warning">
+<body>
 
     <div id="simple_user_tabs" class="container">
         <div class="row">
             <div class="nav nav-tabs mb-5" id="nav-tab" role="tablist">
-                <button class="nav-link" id="addadvert" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">ADS</button>
-                <button class="nav-link" id="show_favourite_ads" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Favourite ADS</button>
-                <button class="nav-link active" id="createadvert" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Create AD</button>
+                <div class="m-2" id="tabSignOut"></div>
+                <button class="nav-link text-info fw-semibold" id="addadvert" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">ADS</button>
+                <button class="nav-link text-info" id="show_favourite_ads" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Favourite ADS</button>
+                <button class="nav-link active text-info" id="createadvert" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Create AD</button>
             </div>
               
             <div>
@@ -32,41 +34,58 @@
         </div>
     </div>
 
-    
 
-    <div id="forms" class="container">
-        <div class="registerForm" id="registerForm">
-            <div class="mb-3">
-                <label for="email" class="form-label text-dark">Email</label>
-                <input type="text" class="form-control w-25" id="email">
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label text-dark">Password</label>
-                <input type="text" class="form-control w-25" id="password">
-            </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-light border border-dark" id="signUp">Sign Up</button>
-                <button type="submit" class="btn btn-light border border-dark" id="login">Login</button>
+    <div class="container" id="forms">
+        <div class="row" id="registerForm">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card border-0 shadow rounded-3 my-5">
+                    <div class="card-body p-4 p-sm-5">
+                        <h5 class="card-title text-center mb-5 fw-light fs-5 fw-bold">Sign Up</h5>
+                        <div>
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control"  placeholder="name@example.com" id="email">
+                                <label for="floatingInput">Email address</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control"  placeholder="Password" id="password">
+                                <label for="floatingPassword">Password</label>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn-login btn btn-light border border-dark" id="signUp">Sign Up</button>
+                                <hr class="my-4">
+                                <button type="submit" class="btn btn-light border border-dark border-0" id="login">Login</button>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
             </div>
         </div>
 
-        <div class="loginForm" id="loginForm">
-            <div class="mb-3">
-                <label for="login_email" class="form-label text-dark">Email</label>
-                <input type="text" class="form-control w-25" id="login_email">
-            </div>
-            <div class="mb-3">
-                <label for="login_password" class="form-label text-dark">Password</label>
-                <input type="text" class="form-control w-25" id="login_password">
-            </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-light border border-dark" id="signIn">Sign In</button>
-                <button type="submit" class="btn btn-light border border-dark" id="register">Register</button>
+        <div class="row" id="loginForm">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card border-0 shadow rounded-3 my-5">
+                    <div class="card-body p-4 p-sm-5">
+                        <h5 class="card-title text-center mb-5 fw-light fs-5 fw-bold">Sign In</h5>
+                        <div>
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" placeholder="name@example.com" id="login_email">
+                                <label for="floatingInput">Email address</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control"  placeholder="Password" id="login_password">
+                                <label for="floatingPassword">Password</label>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn-login btn btn-light border border-dark" id="signIn">Sign In</button>
+                                <hr class="my-4">
+                                <button type="submit" class="btn btn-light border border-dark border-0" id="register">Register</button>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
             </div>
         </div>
     </div>
-
-    
 
 
     <div class="container" id="content">
@@ -75,58 +94,54 @@
             <div class="col-sm-12 col-md-6">
                 <form class="px-3">
                     <div class="mb-3">
-                        <label for="enterCategory" class="form-label text-secondary">Product Category</label>
+                        <label for="enterCategory" class="form-label text-warning">Product Category</label>
                         <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                              Category
-                            </button>
-                            <ul class="dropdown-menu" id="dropdowncategory" aria-labelledby="dropdownMenuButton1">
-
-                            </ul>
+                            <select class="form-select" aria-label="Default select example" id="dropdowncategory">
+                                <option selected>No category</option>
+                            </select>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="enterID" class="form-label text-secondary">Product Code</label>
+                        <label for="enterID" class="form-label text-warning">Product Code</label>
                         <input type="number" class="form-control" id="enterID" placeholder="only numbers...">
                     </div>
                     <div class="mb-3">
-                        <label for="enterName" class="form-label text-secondary">Product Name</label>
+                        <label for="enterName" class="form-label text-warning">Product Name</label>
                         <input type="text" class="form-control" id="enterName">
                     </div>
                     <div class="mb-3">
-                        <label for="enterQuantity" class="form-label text-secondary">Product Quantity</label>
+                        <label for="enterQuantity" class="form-label text-warning">Product Quantity</label>
                         <input type="number" class="form-control" id="enterQuantity">
                     </div>
                     <div class="mb-3">
-                        <label for="enterPrice" class="form-label text-secondary">Product price</label>
+                        <label for="enterPrice" class="form-label text-warning">Product price</label>
                         <input type="number" class="form-control" id="enterPrice">
                     </div>
                     <div class="mb-3">
-                        <label for="enterDescription" class="form-label text-secondary">Product Description</label>
+                        <label for="enterDescription" class="form-label text-warning">Product Description</label>
                         <input type="text" class="form-control" id="enterDescription">
                     </div>
                     <div class="mb-3">
-                        <label for="enterPhoto" class="form-label text-secondary">Product Photo</label>
+                        <label for="enterPhoto" class="form-label text-warning">Product Photo</label>
                         <input type="text" class="form-control" id="enterPhoto">
                     </div>
                     <div class="mb-3 d-flex justify-content-around align-items-center">
-                        <button type="submit" class="btn btn-secondary" id="insert">Insert</button>
-                        <button type="submit" class="btn btn-secondary" id="update">Update</button>
-                        <button type="submit" class="btn btn-secondary" id="remove">Delete</button>
+                        <button type="submit" class="btn btn-dark" id="insert">Insert</button>
+                        <button type="submit" class="btn btn-dark" id="update">Update</button>
                     </div>
                 </form>
             </div>
             <div class="col-sm-12 col-md-6">
                 <div class="row">
-                    <h5 class="text-center text-secondary">Find Product by Code</h5>
+                    <h5 class="text-center text-warning">Find Product by Code</h5>
                     <form class="px-3">
                         <div class="mb-3">
-                            <label for="findID" class="form-label text-secondary">Product Code</label>
+                            <label for="findID" class="form-label text-warning">Product Code</label>
                             <input type="number" class="form-control" id="findID" placeholder="only numbers...">
                         </div>
                         <div class="mt-3 d-flex justify-content-center">
-                            <button type="submit" class="btn btn-secondary m-1" id="find">Select from DB</button>
-                            <button type="submit" class="btn btn-secondary m-1" id="clear">Clear</button>
+                            <button type="submit" class="btn btn-dark m-1" id="find">Select from DB</button>
+                            <button type="submit" class="btn btn-dark m-1" id="clear">Clear</button>
                         </div>
                     </form>
                 </div>
@@ -158,5 +173,7 @@
     </div>
     
     <script type="module" src="./main.js"></script>
+
+    
 </body>
 </html>

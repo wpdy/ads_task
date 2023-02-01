@@ -24,11 +24,10 @@ let enterPhoto = document.getElementById("enterPhoto")
 
 let insertBtn = document.getElementById("insert")
 let updateBtn = document.getElementById("update")
-let removeBtn = document.getElementById("remove")
 let findBtn = document.getElementById("find")
 
  
-let selected_category = 'No Category'
+let dropdowncategory = document.getElementById('dropdowncategory')
 
 function display_product_categories() {
 
@@ -37,19 +36,9 @@ function display_product_categories() {
     get(child(dbref, "Categories/"))
         .then((snapshot) => {
             for (const [key, value] of Object.entries(snapshot.val())) {
-                // console.log(value.CategoryName)   
-                let dropdowncategory = document.getElementById('dropdowncategory')
-                let categoryname = document.createElement('li')
-                let categoryaction = document.createElement('a')
-                categoryaction.textContent = value.CategoryName
-                categoryaction.classList.add('dropdown-item')
-                categoryname.appendChild(categoryaction)
+                let categoryname = document.createElement('option')
+                categoryname.textContent = value.CategoryName
                 dropdowncategory.appendChild(categoryname)
-                
-                categoryaction.addEventListener('click', ()=> {
-                    console.log(value.CategoryName)
-                    selected_category = value.CategoryName
-                })
             }
         })
 
@@ -61,7 +50,7 @@ function display_product_categories() {
 
 
 function InsertData(evt) {
-    // console.log(picked_category)
+    console.log(dropdowncategory.value)
     if (enterID.value == "" || enterName.value == "" || enterQuantity.value == "") {
         alert('neuzpildyti visi laukai')
         return
@@ -78,7 +67,7 @@ function InsertData(evt) {
         Description: enterDescription.value,
         Photo: enterPhoto.value,
         User: getuseruid(),
-        Category: selected_category
+        Category: dropdowncategory.value
     })
     .then(() => {
         alert('Data Added!')
@@ -151,7 +140,7 @@ function UpdateData(evt) {
                         Price: enterPrice.value,
                         Description: enterDescription.value,
                         Photo: enterPhoto.value,
-                        Category: selected_category
+                        Category: dropdowncategory.value
                     })
                 
                     .then(() => {
@@ -186,7 +175,7 @@ function RemoveProduct(productid) {
         })
 }
 
-removeBtn.addEventListener('click', RemoveProduct)
+
 
 function fill_one_user_products() {
     const dbref = ref(db)

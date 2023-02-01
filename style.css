@@ -8,16 +8,17 @@
 
 
 #forms {
-    margin-top: 300px;
-    margin-left: 600px;
+    margin-top: 250px;
 }
 
 
-/* img {
-    margin-bottom: 15px;
+body {
+    background: linear-gradient(to right, #504c4c, #786781);
+}
+
+/* #addadvert {
+    background-color:aqua;
 } */
-
-
 
 
 

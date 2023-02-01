@@ -1,4 +1,4 @@
-import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { getDatabase, ref, get, set, child } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 import { blockuser } from "../user_managment.js";
 import { display_admin_product } from "../product_managment.js";
 

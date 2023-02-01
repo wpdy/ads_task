@@ -1,6 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getDatabase, set, update, ref, get, child, remove, push } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
-import { getAuth, deleteUser, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
 import { firebaseConfig } from "./firebase.js";
 import { loadproduct } from "./product_managment.js";
@@ -8,8 +7,6 @@ import { loadproduct } from "./product_managment.js";
 
 
 const app = initializeApp(firebaseConfig)
-const database = getDatabase(app)
-const auth = getAuth()
 const db = getDatabase();
 
 

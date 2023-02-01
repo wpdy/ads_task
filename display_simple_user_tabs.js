@@ -1,9 +1,11 @@
 import { show_favourite_products } from "./product_managment.js"
 import { showallads } from "./show_all_ads.js"
+import { signout } from "./sign_out_button.js"
 
-
+let tabSignOut = document.getElementById('tabSignOut')
 
 function display_simple_user_tabs() {
+    signout(tabSignOut)
     showadsbutton()
     showcreateadbutton()
     show_favourite_ads()

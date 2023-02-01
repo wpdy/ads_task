@@ -5,7 +5,6 @@ import { load_admin_page } from "./user_roles/load_admin_page.js";
 import { getuserrole } from "./user_managment.js";
 import { signout } from "./sign_out_button.js";
 
-const simple_user_SignOutButtonPlace = document.getElementById('contentSignOutButton')
 const admin_user_SignOutButtonPlace = document.getElementById('signoutButton')
 
 function useron() {
@@ -15,7 +14,6 @@ function useron() {
             load_admin_page()
         }
         else if (data == 'simple_user') {
-            signout(simple_user_SignOutButtonPlace)
             load_simple_user_page()
         }
         else {
