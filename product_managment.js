@@ -214,13 +214,9 @@ function loadproduct(product, appendproduct, favourite_button = false) {
 
         favourite_product_button.addEventListener('click', ()=> {
 
-            let favourite_ads = document.getElementById("favourite_ads")
-            let h1 = document.createElement('h1')
-            h1.textContent = 'LOOL'
-            favourite_ads.appendChild(h1)
-    
             set(ref(db, "Favourite_products/" + product.ID), {
-                product: product.ID
+                product: product.ID,
+                user: getuseruid()
             })
             .then(() => {
                 alert('Data Added!')
@@ -275,15 +271,17 @@ function show_favourite_products() {
         .then((snapshot) => {
             append_favourite_ad.textContent = ''
             for (const [key, value] of Object.entries(snapshot.val())) {
-                get(child(dbref, "Products/" + value.product))
+                if (value.user == getuseruid()) {
+                    get(child(dbref, "Products/" + value.product))
                     .then((snapshot) => {
+                        if (snapshot.val)
                         loadproduct(snapshot.val(), append_favourite_ad)
                     })
 
                     .catch((error) => {
                         console.log('No products')
                     })
-
+                }
             }
         })
 
