@@ -23,6 +23,7 @@ function loginuser() {
                 last_login: loginTime
             })
             console.log('Login successful!')
+            location.reload();
         })
         .catch((error) => {
             const errorCode = error.code;

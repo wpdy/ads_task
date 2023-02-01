@@ -35,6 +35,7 @@ function display_product_categories() {
 
     get(child(dbref, "Categories/"))
         .then((snapshot) => {
+            dropdowncategory.textContent = ''
             for (const [key, value] of Object.entries(snapshot.val())) {
                 let categoryname = document.createElement('option')
                 categoryname.textContent = value.CategoryName
@@ -219,8 +220,7 @@ function loadproduct(product, appendproduct, favourite_button = false) {
             favourite_ads.appendChild(h1)
     
             set(ref(db, "Favourite_products/" + product.ID), {
-                product: product.ID,
-                
+                product: product.ID
             })
             .then(() => {
                 alert('Data Added!')
@@ -267,12 +267,13 @@ function loadproduct(product, appendproduct, favourite_button = false) {
 
 function show_favourite_products() {
     let append_favourite_ad = document.getElementById('favourite_ads')
-    append_favourite_ad.textContent = ''
+    
 
     const dbref = ref(db)
 
     get(child(dbref, "Favourite_products/"))
         .then((snapshot) => {
+            append_favourite_ad.textContent = ''
             for (const [key, value] of Object.entries(snapshot.val())) {
                 get(child(dbref, "Products/" + value.product))
                     .then((snapshot) => {
