@@ -1,14 +1,11 @@
 
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getDatabase, ref, get, set, child, update, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
-import { firebaseConfig } from "./firebase.js";
+import { child, get, getDatabase, ref, remove, set, update } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
 
 import { getuseruid } from "./user_managment.js";
 import { fill_admin_product } from "./user_roles/load_admin_page.js";
 
-const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
 
@@ -26,7 +23,7 @@ let insertBtn = document.getElementById("insert")
 let updateBtn = document.getElementById("update")
 let findBtn = document.getElementById("find")
 
- 
+
 let dropdowncategory = document.getElementById('dropdowncategory')
 
 function display_product_categories() {
@@ -59,7 +56,7 @@ function InsertData(evt) {
 
     evt.preventDefault()
     console.log(enterID.value, enterName.value, enterQuantity.value)
-    
+
     set(ref(db, "Products/" + enterID.value), {
         Name: enterName.value,
         ID: enterID.value,
@@ -70,13 +67,13 @@ function InsertData(evt) {
         User: getuseruid(),
         Category: dropdowncategory.value
     })
-    .then(() => {
-        alert('Data Added!')
-        fill_one_user_products(true)
-    })
-    .catch((error) => {
-        alert(error)
-    })
+        .then(() => {
+            alert('Data Added!')
+            fill_one_user_products(true)
+        })
+        .catch((error) => {
+            alert(error)
+        })
 }
 
 insertBtn.addEventListener('click', InsertData)
@@ -104,7 +101,7 @@ function FindData(evt) {
             console.log(snapshot.val().Name)
 
             if (snapshot.exists()) {
-                display_one_product(snapshot.val(), findData)                
+                display_one_product(snapshot.val(), findData)
             }
 
             else {
@@ -134,7 +131,7 @@ function UpdateData(evt) {
     get(child(dbref, "Products/"))
         .then((snapshot) => {
             for (const [key, value] of Object.entries(snapshot.val())) {
-                if(enterID.value == value.ID && value.User == getuseruid()) {
+                if (enterID.value == value.ID && value.User == getuseruid()) {
                     update(ref(db, "Products/" + enterID.value), {
                         Name: enterName.value,
                         Quantity: enterQuantity.value,
@@ -143,25 +140,25 @@ function UpdateData(evt) {
                         Photo: enterPhoto.value,
                         Category: dropdowncategory.value
                     })
-                
-                    .then(() => {
-                        alert('Data Updated')
-                        fill_one_user_products()
-                        return
-                    })
-                    .catch((error) => {
-                        alert(error)
-                    })
+
+                        .then(() => {
+                            alert('Data Updated')
+                            fill_one_user_products()
+                            return
+                        })
+                        .catch((error) => {
+                            alert(error)
+                        })
                 }
-                
+
             }
         })
-        
+
 
         .catch((error) => {
             alert(error)
         })
-    
+
 }
 
 updateBtn.addEventListener('click', UpdateData)
@@ -195,7 +192,7 @@ function fill_one_user_products() {
         .catch((error) => {
             console.log('No products')
         })
-        
+
 }
 
 function loadproduct(product, appendproduct, favourite_button = false) {
@@ -212,20 +209,53 @@ function loadproduct(product, appendproduct, favourite_button = false) {
         favourite_product_button.id = 'favourite_' + product.ID
         listItem.appendChild(favourite_product_button)
 
-        favourite_product_button.addEventListener('click', ()=> {
+        favourite_product_button.addEventListener('click', () => {
 
             set(ref(db, "Favourite_products/" + product.ID), {
                 product: product.ID,
                 user: getuseruid()
             })
-            .then(() => {
-                alert('Data Added!')
-            })
-            .catch((error) => {
-                alert(error)
-            })
+                .then(() => {
+                    alert('Data Added!')
+                })
+                .catch((error) => {
+                    alert(error)
+                })
         })
     }
+    //-----------//Comments----------------
+    // let comment_button = document.createElement('button')
+    // comment_button.textContent = 'Comment'
+    // listItem.appendChild(comment_button)
+
+    // comment_button.addEventListener('click', () => {
+    //     let exampleModal = new bootstrap.Modal(document.getElementById('exampleModal'))
+    //     exampleModal.show()
+
+    //     let comment_value = document.getElementById('comment_value')
+    //     let add_comment_button = document.getElementById('add_comment_button')
+    //     let comments_content = document.getElementById('comments_content')
+
+    //     add_comment_button.addEventListener('click', () => {
+    //         let comment_li = document.createElement('li')
+    //         comment_li.textContent = comment_value.value
+    //         comments_content.appendChild(comment_li)
+
+    //         set(ref(db, "Product_comments/" + comment_value.value), {
+    //             comment: comment_value.value,
+    //             product: product.ID
+    //         })
+    //             .then(() => {
+    //                 alert('Data Added!')
+    //             })
+    //             .catch((error) => {
+    //                 alert(error)
+    //             })
+
+
+    //     })
+
+    // })
 
     appendproduct.appendChild(listItem)
 
@@ -257,13 +287,43 @@ function loadproduct(product, appendproduct, favourite_button = false) {
     listItemFived.textContent = "Photo: "
     appendproduct.appendChild(listItemFived)
     appendproduct.appendChild(my_img)
-    
+
 }
+
+// function show_product_comments() {
+//     let comments_content = document.getElementById('comments_content')
+
+//     const dbref = ref(db)
+
+//     get(child(dbref, "Product_comments/"))
+//         .then((snapshot) => {
+//             comments_content.textContent = ''
+//             for (const [key, value] of Object.entries(snapshot.val())) {
+//                 console.log(value)
+
+//                 get(child(dbref, "Products/" + value.product))
+//                     .then((snapshot) => {
+//                         if (snapshot.val)
+//                             loadproduct(snapshot.val(), append_favourite_ad)
+//                     })
+
+//                     .catch((error) => {
+//                         console.log('No products')
+//                     })
+
+//             }
+//         })
+
+//         .catch((error) => {
+//             console.log("No comments")
+
+//         })
+// }
 
 
 function show_favourite_products() {
     let append_favourite_ad = document.getElementById('favourite_ads')
-    
+
 
     const dbref = ref(db)
 
@@ -273,14 +333,14 @@ function show_favourite_products() {
             for (const [key, value] of Object.entries(snapshot.val())) {
                 if (value.user == getuseruid()) {
                     get(child(dbref, "Products/" + value.product))
-                    .then((snapshot) => {
-                        if (snapshot.val)
-                        loadproduct(snapshot.val(), append_favourite_ad)
-                    })
+                        .then((snapshot) => {
+                            if (snapshot.val)
+                                loadproduct(snapshot.val(), append_favourite_ad)
+                        })
 
-                    .catch((error) => {
-                        console.log('No products')
-                    })
+                        .catch((error) => {
+                            console.log('No products')
+                        })
                 }
             }
         })
@@ -302,20 +362,20 @@ function display_one_product(product, appendproduct) {
 
 function display_delete_button(product, appendproduct) {
 
-        const remove_product_button = document.createElement('button')
-        remove_product_button.textContent = 'Delete AD'
-        remove_product_button.id = 'delete' + product.ID
-        remove_product_button.classList.add('btn', 'btn-danger', 'mb-5')
-        appendproduct.appendChild(remove_product_button)
+    const remove_product_button = document.createElement('button')
+    remove_product_button.textContent = 'Delete AD'
+    remove_product_button.id = 'delete' + product.ID
+    remove_product_button.classList.add('btn', 'btn-danger', 'mb-5')
+    appendproduct.appendChild(remove_product_button)
 
-        return remove_product_button
-        
+    return remove_product_button
+
 }
 
 function display_admin_product(product, appendproduct) {
     loadproduct(product, appendproduct)
     const delete_button = display_delete_button(product, appendproduct)
-    delete_button.addEventListener('click', ()=> {
+    delete_button.addEventListener('click', () => {
         RemoveProduct(product.ID)
         fill_admin_product()
     })
@@ -324,16 +384,16 @@ function display_admin_product(product, appendproduct) {
 function display_user_product(product, appendproduct) {
     loadproduct(product, appendproduct)
     const delete_button = display_delete_button(product, appendproduct)
-    delete_button.addEventListener('click', ()=> {
+    delete_button.addEventListener('click', () => {
         RemoveProduct(product.ID)
         fill_one_user_products()
     })
 }
 
-document.getElementById('clear').addEventListener('click', ()=> {
+document.getElementById('clear').addEventListener('click', () => {
     findData.value = ''
     fillalldata()
 })
 
 
-export { fill_one_user_products, display_admin_product, display_user_product, loadproduct, show_favourite_products, display_product_categories }
+export { fill_one_user_products, display_admin_product, display_user_product, loadproduct, show_favourite_products, display_product_categories };

@@ -1,0 +1,8 @@
+{
+    "editor.cursorBlinking": "phase",
+    "editor.cursorStyle": "line",
+    "editor.cursorSurroundingLines": 0,
+    "editor.cursorSurroundingLinesStyle": "default",
+    "editor.cursorWidth": 5,
+    "liveServer.settings.port": 5501
+}

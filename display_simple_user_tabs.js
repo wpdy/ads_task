@@ -17,6 +17,7 @@ function showadsbutton() {
         document.getElementById('adverts_content').style.display = 'block'
         document.getElementById('favourite_ads').style.display = 'none'
         showallads()
+        // show_product_comments()
     })
 }
 
